@@ -1,0 +1,629 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+
+
+.logo img:hover {
+    transform: scale(1.15); /* Slightly increase the size */
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3); /* Add a larger shadow for depth */
+}
+.logo img {
+    width: 140px;
+    height: 100px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+nav ul, .buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover{
+    background-color: #333;
+    color: palevioletred;
+transform: translate(100px 100px);
+}
+
+.buttons{
+    padding-left: 10px;
+}
+
+/* Button styling */
+.register-btn, .signin-btn {
+    color: #333;
+    background-color: rgb(250, 215, 218);
+    border: 2px solid transparent;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.register-btn:hover, .signin-btn:hover {
+    background-color: #333;
+    color: whitesmoke;
+    border: 2px solid palevioletred;
+}
+
+.menu-icon {
+    font-size: 24px;
+    color: white;
+    display: none;
+    cursor: pointer;
+}
+
+/* Burger Menu */
+#navbar {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+/*mmmmmmmmmmmmmmmmmm*/
+/* Hover effect */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card button:hover {
+    background-color: #666;
+}
+
+
+
+
+
+
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .logo img {
+        width: 100px; /* Reduced size for small screens */
+        height: 70px;
+    }
+
+    .menu-icon {
+        display: block; /* Show burger menu icon */
+    }
+
+    #navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #333;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        z-index: 1000;
+    }
+
+    #navbar ul, .buttons {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0;
+    }
+
+    /* Button styles remain consistent on mobile */
+    nav a {
+        color: whitesmoke;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #navbar.open {
+        display: flex;
+    }
+
+    /* Align logo and menu icon side by side with space in between */
+    header {
+        flex-direction: row;
+        padding: 10px 20px;
+    }
+
+    .logo {
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-icon {
+        font-size: 28px;
+        cursor: pointer;
+    }
+}
+
+
+
+.content {
+    display: inline-flex;
+    margin-top: 0px;
+    padding: 0;
+}
+
+.intro {
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    transform: translateY(230px);
+    margin-left: 40px;
+}
+
+
+
+.intro h2 {
+    color: purple;
+}
+
+
+.content #signup {
+      transform: translateY(10px);
+    color: black;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: 3px solid rgb(red, green, blue);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#signup:hover {
+    background-color: black;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.footer-links{
+    display: inline-flex;
+}
+.footer-logo img {
+    width: 200px;
+}
+
+.footer-content {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.ft {
+    margin: 30px;
+}
+
+.ft ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.ft a {
+    text-decoration: none;
+    color: whitesmoke;
+    transition: color 0.3s;
+}
+
+.ft h4 {
+    color: pink;
+}
+
+.ft a:hover {
+    color: #ffffff;
+    background-color: #007bff;
+}
+
+.social-icons {
+    margin-top: 130px;
+}
+
+.social-icons img {
+    width: 50px;
+    margin: 30px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.social-icons a:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
+
+.hero img {
+    transform: translateY(65px);
+}
+
+.hero, .hero2 {
+    width: 100%;
+}
+
+.hero img, .hero2 img {
+    width: 100%;
+    height: auto;
+}
+
+/* ABOUT PAGE STYLES */
+.cont {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.cont h2 {
+    color: palevioletred;
+}
+
+.cont1 {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: justify;
+}
+
+.cont p {
+    text-align: justify;
+}
+
+.cont1 img {
+    width: 300px;
+    height: 300px;
+    transform: translateY(-20px);
+    border-radius: 10px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.cont {
+    margin-bottom: 40px;
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
+.cont1 img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: slideIn 1.5s ease-out forwards;
+}
+
+h2, p, ul {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and small desktops */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-icons {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+
+    .cont1 {
+        flex-direction: column;
+    }
+
+    .cont1 img {
+        width: 100%;
+        height: auto;
+    }
+
+    .intro {
+        transform: translateY(20px);
+        margin: 10px 0;
+    }
+
+    footer {
+        padding: 1rem;
+    }
+
+    .social-icons img {
+        width: 40px;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .logo img {
+        width: 100px;
+        height: auto;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin-bottom: 5px;
+    }
+
+    nav a {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    .register-btn, .signin-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .intro {
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .hero, .hero2 {
+        margin-bottom: 20px;
+    }
+
+    .hero img, .hero2 img {
+        max-width: 100%;
+    }
+
+    #signup {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .footer-logo img {
+        width: 150px;
+    }
+
+    .social-icons img {
+        width: 30px;
+        margin: 15px;
+    }
+
+    .cont1 img {
+        width: 80%;
+    }
+
+    footer {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ft {
+        margin: 10px 0;
+    }
+}
+
+
+.products {
+    text-align: center; /* Center-align text within the section */
+    padding: 50px 20px; /* Padding around the section */
+    background-color: #f0f0f0; /* Light grey background */
+}
+
+.products h2 {
+    font-size: 2.5em; /* Size of the section title */
+    margin-bottom: 20px; /* Space below the title */
+    color: #333; /* Darker text color */
+}
+
+.products p {
+    font-size: 1.1em; /* Size of the paragraph text */
+    color: #666; /* Grey text color */
+    margin-bottom: 40px; /* Space below the paragraph */
+    max-width: 600px; /* Maximum width for the paragraph */
+    margin-left: auto; /* Centering with auto margins */
+    margin-right: auto; /* Centering with auto margins */
+    text-align: justify; /* Justify the paragraph text */
+}
+
+.crd {
+    display: flex; /* Use flexbox for card layout */
+    justify-content: center; /* Center cards in the row */
+    gap: 20px; /* Space between cards */
+    flex-wrap: wrap; /* Allow wrapping of cards on smaller screens */
+}
+
+.card1, .card2, .card3 {
+    background-color: #fff; /* White background for cards */
+    width: 250px; /* Fixed width for each card */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Clip overflowing content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: transform 0.3s; /* Smooth scaling effect on hover */
+}
+
+.card1:hover, .card2:hover, .card3:hover {
+    transform: scale(1.05); /* Slightly enlarge card on hover */
+}
+
+.card1 img, .card2 img, .card3 img {
+    width: 100%; /* Responsive image width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.content-card {
+    padding: 20px; /* Padding inside the card */
+    text-align: center; /* Center text inside the card */
+}
+
+.card-number {
+    font-size: 1.5em; /* Larger font size for card number */
+    color: #d4a673; /* Unique color for card number */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 10px; /* Space below the number */
+}
+
+.card1 h3, .card2 h3, .card3 h3 {
+    font-size: 1.3em; /* Title font size */
+    margin: 10px 0; /* Space above and below the title */
+    color: #333; /* Title color */
+}
+
+.card1 p, .card2 p, .card3 p {
+    font-size: 0.9em; /* Paragraph font size */
+    color: #666; /* Paragraph color */
+    margin-bottom: 20px; /* Space below the paragraph */
+}
+
+.card1 button, .card2 button, .card3 button {
+    background-color: #d4a673; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.card1 button:hover, .card2 button:hover, .card3 button:hover {
+    background-color: #b3895d; /* Button background color on hover */
+}
+
+
+
+
+
+
+/*...............*/
+
+   /* Link styling */
+ 
+
+  /* Popup overlay styling */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+  }
+
+  /* Popup box styling */
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -60%);
+    width: 500px;
+    padding: 20px;
+    background-color: black;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .popup .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .popup .header h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .popup .header button {
+    font-size: 16px;
+    background: black;
+    border: none;
+    cursor: pointer;
+    color:white;
+  }
+
+  .popup .content {
+    margin-top: 10px;
+    display: block; /* Ensuring content is visible */
+  }
+
+  /* Minimized styling */
+  .minimized {
+    height: 40px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+  }
