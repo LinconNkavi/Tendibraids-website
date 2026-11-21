@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/style.css">
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "CUTO2u1l7OG57yOzs",
+      });
+   })();
+</script>
+<script type="module" src="./Product.js" defer></script>
+
+    <title>Products Page</title>
+    <style>
+        /* Basic CSS for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            position: relative;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .burger-menu {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 12px;
+            display: none; /* Hidden when cart is empty */
+        }
+
+        .products {
+            padding: 20px;
+        }
+
+        .crd {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content-card {
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                background-color: #333;
+                width: 200px;
+                padding: 10px;
+                border-radius: 5px;
+                z-index: 1000;
+                flex-direction: column;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+
+        /*HHHHHHHHHHHHHHHHHHHHHHHHH*/
+    /* Modal Background Overlay */
+    .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+
+
+
+
+        /* Modal Styles */
+        /* Popup container styling */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      display: none; /* Hidden by default */
+      z-index: 1000;
+    }
+
+    /* Close button styling */
+    .popup .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 18px;
+      color: black;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Background overlay styling */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    
+        
+     /*HHHHHHHHHHHHHHHHHHHHHHHHH*/
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a> 
+        </div>
+        <button class="burger-menu" onclick="toggleMenu()">☰</button>
+        <nav id="nav-menu">
+            <ul>
+                <li><button onclick="goToHome()">Home</button></li>
+                <!--mmmmmmmmmmmmm-->
+                <li><button id="moreInfoBtn">More Info</button></li>
+                
+                <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+                <li> <button id="out" type="submit">Sign Out</button></li>
+                <li style="position: relative;">
+                    <button onclick="openCart()">
+                        <img src="./Assets/pictures/cart.png" alt="Cart" style="width: 20px; vertical-align: middle;"> Cart
+                    </button>
+                    <span class="cart-badge" id="cart-badge">0</span> <!-- Badge for cart item count -->
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+
+    <!-- Popup message -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+      <button class="close-btn" id="closePopup">&times;</button>
+      <h2>More Information</h2>
+      <p>To complete booking a slot at ClubBraids by Theodore please note!</p>
+      <p>You are required pay a deposit of R100.00 to the account provided below
+         and bring your order number or proof of payment to the salon. 
+         The remaining balance will be due at the time of service before braiding.</p>
+  
+      <p><strong>Payment Details:</strong></p>
+      <ul>
+        <li>Account Holder Name: Theodore Moleboheng Senokoane</li>
+        <li>Account Number: 1694057648</li>
+        <li>Branch Code: 470010</li>
+        <li>Account Type: Savings account</li>
+        <br><br>
+        <li><B>NB:ON REFERENCE PUT YOUR ORDER NUMBER</B></li>
+      </ul>
+
+  
+      <p>Regards,</p>
+      <p><strong>CLUBBRAIDS BY THEODORE</strong></p>
+    </div>
+
+
+    <section class="products">
+        <h2>Featured Collections</h2>
+        <p>Our Solutions are tailor-made for each individual to understand specific needs.</p>
+        <div class="crd">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 10.jpeg" alt="Knotless Braids">
+                <div class="content-card">
+                    <h3>Knotless Braids</h3>
+                    <h3>Price: R450.00</h3>
+                    <p>Get stunning Medium Knotless Braidsbeauty, comfort, and style in one!</p>
+                    <input type="number" id="Knotless-quantity" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Knotless braids', 25, document.getElementById('Knotless-quantity').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 11.jpeg" alt="Hair Coloring">
+                <div class="content-card">
+                    <h3>Short Knotless Braids</h3>
+                    <h3>Price: R350.00</h3>
+                    <p>Get stunning Medium Knotless Braidsbeauty, comfort, and style in one!</p>
+                    <input type="number" id="Short Knotless Braids" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Short Knotless Braids', 19.44, document.getElementById('Short Knotless Braids').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 4.jpeg" alt="Conditioners">
+                <div class="content-card">
+                    <h3>Tribals</h3>
+                    <h3>Price: R300.00</h3>
+                    <p>Transform your look with gorgeous Tribal Braids—beauty and elegance combined!</p>
+                    <input type="number" id="Tribals" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Tribals', 16.66, document.getElementById('Tribals').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!--card 4-->
+           
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 5.jpeg" alt="Condition">
+                <div class="content-card">
+                    <h3>Tribals</h3>
+                    <h3>Price: R400.00</h3>
+                    <p>Transform your look with gorgeous Tribal Braids—beauty and elegance combined!</p>
+                    <input type="number" id="Tribals." value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Tribals.', 22.22, document.getElementById('Tribals.').value)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Second Section-->
+    <section class="products">
+
+        <div class="crd">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 6.jpeg" alt="Shampoos">
+                <div class="content-card">
+                    <h3>Tribals</h3>
+                    <h3>Price:R380.00 </h3>
+                    <p>Transform your look with gorgeous Tribal Braids—beauty and elegance combined!</p>
+                    <input type="number" id="-Tribals" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('-Tribals', 21.11, document.getElementById('-Tribals').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 7.jpeg" alt="Hair Coloring">
+                <div class="content-card">
+                    <h3>Short swept</h3>
+                    <h3>Price:R250.00</h3>
+                    <p>Achieve effortless style with chic Short Swept Braids—perfect for any look!</p>
+                    <input type="number" id="Short swept" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Short swept', 13.88, document.getElementById('Short swept').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 8.jpeg" alt="Conditioners">
+                <div class="content-card">
+                    <h3>Long side swept</h3>
+                    <h3>Price:R300.00</h3>
+                    <p>Elevate your style with beautiful Long Side Swept Braids—bold and stunning!</p>
+                    <input type="number" id="Long side swept" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Long side swept', 16.66, document.getElementById('Long side swept').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!--card 4-->
+            <div class="card">
+                <img src="./Assets/ProdPics/sty1 9.jpeg" alt="Condition">
+                <div class="content-card">
+                    <h3>Long Knotless Braids</h3>
+                    <h3>Price:R550.00</h3>
+                    <p>Embrace elegance with Long Knotless Braids—classic, sleek, and stylish!</p>
+                    <input type="number" id="Long Knotless Braids" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Long Knotless Braids', 30.55, document.getElementById('Long Knotless Braids').value)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  <!--Second Section-->
+  <section class="products">
+
+    <div class="crd">
+        <!-- Card 1 -->
+        <div class="card">
+            <img src="./Assets/ProdPics/sty1.jpeg" alt="Swept back">
+            <div class="content-card">
+                <h3>Swept back</h3>
+                <h3>Price:R250.00 </h3>
+                <p>Rock a timeless look with Swept Back Braids—simple yet stunning!</p>
+                <input type="number" id="Swept back" value="1" min="1" style="width: 50px;">
+                <button onclick="addToCart('Swept back', 13.88, document.getElementById('Swept back').value)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <img src="./Assets/ProdPics/sty12.jpeg" alt="Straight back">
+            <div class="content-card">
+                <h3>Straight back</h3>
+                <h3>Price:R200.00</h3>
+                <p>Get a sleek, stylish look with Straight Back Braids—effortlessly cool!</p>
+                <input type="number" id="Straight back" value="1" min="1" style="width: 50px;">
+                <button onclick="addToCart('Straight back', 11.11, document.getElementById('Straight back').value)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <img src="./Assets/ProdPics/sty13.jpeg" alt="Conditioners">
+            <div class="content-card">
+                <h3>Straight up</h3>
+                <h3>Price:R250.00</h3>
+                <p>Go bold with Straight Up Braids—modern, chic, and full of style!</p>
+                <input type="number" id="Straight up" value="1" min="1" style="width: 50px;">
+                <button onclick="addToCart('Straight up', 13.88, document.getElementById('Straight up').value)">Add to Cart</button>
+            </div>
+        </div>
+
+      
+    </div>
+</section>
+
+
+
+
+    <!-- Modal for Cart -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h3>Your Cart</h3>
+            <div id="cart-items"></div>
+            <h4 id="total-amount">Total: R0.00</h4>
+            <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+
+        
+        const conversionRate = 18; // 1 USD to 18 ZAR, adjust this as needed
+        let cart = [];
+
+        function addToCart(itemName, itemPrice, quantity) {
+            const itemPriceInRands = itemPrice * conversionRate; // Convert price to Rands
+            const existingItem = cart.find(item => item.name === itemName);
+            const qty = parseInt(quantity);
+
+            if (existingItem) {
+                existingItem.quantity += qty; 
+            } else {
+                cart.push({ name: itemName, price: itemPriceInRands, quantity: qty });
+            }
+            updateCartDisplay();
+        }
+
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            let total = 0; // Initialize total
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <div>${item.name} - R${item.price.toFixed(2)} x ${item.quantity}</div>
+                    <button onclick="updateQuantity('${item.name}', -1)">-</button>
+                    <button onclick="updateQuantity('${item.name}', 1)">+</button>
+                    <button onclick="removeFromCart('${item.name}')">Remove</button>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+                total += item.price * item.quantity; // Update total amount
+            });
+
+            document.getElementById('total-amount').innerText = 'Total: R' + total.toFixed(2);
+            document.getElementById('cart-badge').innerText = cart.length;
+            document.getElementById('cart-badge').style.display = cart.length > 0 ? 'inline' : 'none';
+        }
+
+        function updateQuantity(itemName, change) {
+            const item = cart.find(i => i.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function generateOrderNumber() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0].replace(/-/g, ''); // Format: YYYYMMDD
+            const randomNum = Math.floor(Math.random() * 10000); // Random number between 0 and 9999
+            return `${formattedDate}-${randomNum}`; // Format: YYYYMMDD-RANDOM
+        }
+
+(function(){
+    emailjs.init("CUTO2u1l7OG57yOzs"); // Replace with your EmailJS User ID
+})();
+
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+    } else {
+        const email = prompt("Please enter your email to complete the order:");
+        
+        if (email && validateEmail(email)) {
+            const orderNumber = generateOrderNumber();
+            const totalAmount = document.getElementById('total-amount').innerText;
+
+            console.log(`Order Number: ${orderNumber}, Total Amount: ${totalAmount}, User Email: ${email}`);
+            alert(`Proceeding to checkout...\nYour order number is: ${orderNumber}\nTotal Amount: ${totalAmount}\nA confirmation will be sent to: ${email}`);
+            
+            // Send the email
+            sendEmail(email, orderNumber, totalAmount);
+            
+            cart = [];
+            updateCartDisplay();
+            closeCart();
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    }
+}
+
+function sendEmail(userEmail, orderNumber, totalAmount) {
+    const templateParams = {
+        order_number: orderNumber,
+        total_amount: totalAmount,
+        user_email: userEmail
+    };
+
+    emailjs.send('service_dtjsg3b', 'template_t2d30k9', templateParams)
+        .then(function(response) {
+            console.log('Email sent successfully!', response.status, response.text);
+        }, function(error) {
+            console.error('Failed to send email:', error);
+        });
+}
+
+
+
+
+// Function to validate email format
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function toggleMenu() {
+            const navMenu = document.querySelector('nav ul'); // Target the ul element
+            navMenu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            const navMenu = document.querySelector('nav ul');
+            const burgerMenu = document.querySelector('.burger-menu');
+
+            if (!navMenu.contains(event.target) && event.target !== burgerMenu) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        function goToHome() {
+            window.location.href = './index.html';
+        }
+
+        function logout() {
+            alert('Signing out...');
+        }
+
+
+
+/*-------------------*/
+ // Get elements
+ const moreInfoBtn = document.getElementById('moreInfoBtn');
+    const popup = document.getElementById('popup');
+    const closePopupBtn = document.getElementById('closePopup');
+    const overlay = document.getElementById('overlay');
+
+    // Show popup and overlay when button is clicked
+    moreInfoBtn.addEventListener('click', () => {
+      popup.style.display = 'block';
+      overlay.style.display = 'block';
+    });
+
+    // Hide popup and overlay when close button is clicked
+    closePopupBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+
+    // Hide popup and overlay when overlay is clicked
+    overlay.addEventListener('click', () => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+
+
+
+
+
+
+       
+    </script>
+
+
+
+
+
+ <!-- Footer section -->
+ <footer>
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo">
+            
+        </div>
+
+
+        <div class="footer-links">
+            <div class="ft">
+                <h4>About Us</h4>
+                <ul>
+                    
+                    <li><a href="Contact.html">Contact Information</a></li>
+                    <li><a href="Contact.html#map">Location</a></li>
+                </ul>
+            </div>
+            <div class="ft">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="./Services.html">Hairstyles</a></li>
+                  <!-- Appointments link -->
+
+
+<!-- Popup overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Popup box -->
+<div class="popup" id="popup">
+  <div class="header">
+    <h2 id="popupTitle">Information</h2>
+    <button id="minimizePopup">_</button>
+    <button id="closePopup">&times;</button>
+  </div>
+  <div class="content" id="popupContent">
+    <!-- Content will be inserted here based on the clicked link -->
+  </div>
+</div>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/Theodorah Molebogeng" target="_blank">
+            <img src="./Assets/pictures/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/27730298765" target="_blank">
+            <img src="./Assets/pictures/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.instagram.com/Club_Braids_By_Theodore" target="_blank">
+            <img src="./Assets/pictures/instagram.png" alt="Instagram">
+        </a>
+    </div>
+    <p>&copy; Copyright - ClubBraids</p>
+</footer>
+
+
+
+</body>
+</html>

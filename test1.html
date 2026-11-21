@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/style.css">
+    <title>Products Page</title>
+    <style>
+        /* Basic CSS for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            position: relative;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .burger-menu {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 12px;
+            display: none; /* Hidden when cart is empty */
+        }
+
+        .products {
+            padding: 20px;
+        }
+
+        .crd {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card1, .card2, .card3 {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .card1 img, .card2 img, .card3 img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content-card {
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                background-color: #333;
+                width: 200px;
+                padding: 10px;
+                border-radius: 5px;
+                z-index: 1000;
+                flex-direction: column;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a> 
+        </div>
+        <button class="burger-menu" onclick="toggleMenu()">☰</button>
+        <nav id="nav-menu">
+            <ul>
+                <li><button onclick="goToHome()">Home</button></li>
+                <li><button onclick="goToProfile()">Profile</button></li>
+                <li><button onclick="logout()">Sign Out</button></li>
+                <li style="position: relative;">
+                    <button onclick="openCart()">
+                        <img src="./Assets/pictures/cart.png" alt="Cart" style="width: 20px; vertical-align: middle;"> Cart
+                    </button>
+                    <span class="cart-badge" id="cart-badge">0</span> <!-- Badge for cart item count -->
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="products">
+        <h2>Featured Collections</h2>
+        <p>Our Solutions are tailor-made for each individual to understand specific needs.</p>
+        <div class="crd">
+            <!-- Card 1 -->
+            <div class="card1">
+                <img src="./Assets/pictures/style3.jpeg" alt="Shampoos">
+                <div class="content-card">
+                    <h3>Shampoos</h3>
+                    <p>Phasellus et semper sapien. Sed pulvinar a dolor imperdiet iaculis arcu volutpat.</p>
+                    <input type="number" id="shampoo-quantity" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Shampoos', 10, document.getElementById('shampoo-quantity').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card2">
+                <img src="./Assets/pictures/Style2.jpeg" alt="Hair Coloring">
+                <div class="content-card">
+                    <h3>Hair Coloring</h3>
+                    <p>Ut venenatis urna pretium purus dapibus feugiat vel sit amet quam dapibus leo.</p>
+                    <input type="number" id="hair-coloring-quantity" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Hair Coloring', 15, document.getElementById('hair-coloring-quantity').value)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card3">
+                <img src="./Assets/pictures/Style1.jpeg" alt="Conditioners">
+                <div class="content-card">
+                    <h3>Conditioners</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu mattis ante.</p>
+                    <input type="number" id="conditioner-quantity" value="1" min="1" style="width: 50px;">
+                    <button onclick="addToCart('Conditioners', 12, document.getElementById('conditioner-quantity').value)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Cart -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h3>Your Cart</h3>
+            <div id="cart-items"></div>
+            <h4 id="total-amount">Total: R0.00</h4>
+            <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        const conversionRate = 18; // 1 USD to 18 ZAR, adjust this as needed
+        let cart = [];
+
+        function addToCart(itemName, itemPrice, quantity) {
+            const itemPriceInRands = itemPrice * conversionRate; // Convert price to Rands
+            const existingItem = cart.find(item => item.name === itemName);
+            const qty = parseInt(quantity);
+
+            if (existingItem) {
+                existingItem.quantity += qty; 
+            } else {
+                cart.push({ name: itemName, price: itemPriceInRands, quantity: qty });
+            }
+            updateCartDisplay();
+        }
+
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            let total = 0; // Initialize total
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <div>${item.name} - R${item.price.toFixed(2)} x ${item.quantity}</div>
+                    <button onclick="updateQuantity('${item.name}', -1)">-</button>
+                    <button onclick="updateQuantity('${item.name}', 1)">+</button>
+                    <button onclick="removeFromCart('${item.name}')">Remove</button>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+                total += item.price * item.quantity; // Update total amount
+            });
+
+            document.getElementById('total-amount').innerText = 'Total: R' + total.toFixed(2);
+            document.getElementById('cart-badge').innerText = cart.length;
+            document.getElementById('cart-badge').style.display = cart.length > 0 ? 'inline' : 'none';
+        }
+
+        function updateQuantity(itemName, change) {
+            const item = cart.find(i => i.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function generateOrderNumber() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0].replace(/-/g, ''); // Format: YYYYMMDD
+            const randomNum = Math.floor(Math.random() * 10000); // Random number between 0 and 9999
+            return `${formattedDate}-${randomNum}`; // Format: YYYYMMDD-RANDOM
+        }
+
+        /*function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+            } else {
+                const orderNumber = generateOrderNumber(); // Generate order number
+                alert(`Proceeding to checkout...\nYour order number is: ${orderNumber}`);
+                cart = [];
+                updateCartDisplay();
+                closeCart();
+            }
+        }*/
+
+        function proceedToCheckout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+    } else {
+        const orderNumber = generateOrderNumber(); // Generate order number
+        const totalAmount = document.getElementById('total-amount').innerText; // Get total amount text
+        console.log(`Order Number: ${orderNumber}, Total Amount: ${totalAmount}`); // Log to console
+        alert(`Proceeding to checkout...\nYour order number is: ${orderNumber}`);
+        cart = [];
+        updateCartDisplay();
+        closeCart();
+    }
+}
+
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function toggleMenu() {
+            const navMenu = document.querySelector('nav ul'); // Target the ul element
+            navMenu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            const navMenu = document.querySelector('nav ul');
+            const burgerMenu = document.querySelector('.burger-menu');
+
+            if (!navMenu.contains(event.target) && event.target !== burgerMenu) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        function goToHome() {
+            window.location.href = './index.html';
+        }
+
+        function goToProfile() {
+            window.location.href = './profile.html';
+        }
+
+        function logout() {
+            alert('Signing out...');
+        }
+    </script>
+</body>
+</html>

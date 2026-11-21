@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/style.css">
+    <script src="./test.js"></script>
+    <title>Services - ClubBraids by Theodore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+    
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .card:hover {
+            transform: scale(1.05);
+        }
+    
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+    
+        .card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    
+        .card-title {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: palevioletred;
+        }
+    
+        .card-description {
+            color: #555;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+    
+        .card-hover-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    
+        .card:hover .card-hover-info {
+            opacity: 1;
+        }
+    
+        .card-hover-info p {
+            padding: 20px;
+            text-align: center;
+        }
+    
+        /* Media Queries for Responsiveness */
+        
+        /* For tablets and small desktops */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust card size for smaller screens */
+            }
+            
+            .card-title {
+                font-size: 1.3em; /* Slightly smaller title font */
+            }
+            
+            .card-description {
+                font-size: 0.95em; /* Adjust description size */
+            }
+        }
+    
+        /* For mobile devices */
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+            
+            .card-title {
+                font-size: 1.2em; /* Further reduce title size for mobile */
+            }
+    
+            .card-description {
+                font-size: 0.9em; /* Adjust description size */
+            }
+    
+            .card-content {
+                padding: 15px; /* Adjust padding for mobile */
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a> 
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="About.html">About Us</a></li>
+                <li><a href="Contact.html">Contact Us</a></li>
+            </ul>
+            <div class="buttons">
+                <a href="./Register.html"><button class="register-btn">Register</button></a>
+                <a href="./Login.html"><button class="signin-btn">Sign In</button></a>
+            </div>
+        </nav>
+    </header>
+
+
+
+
+    <h1 style="text-align: center; margin: 20px 0; color: palevioletred;">Our Services</h1>
+    <div class="container">
+
+        <div class="card">
+            <img src="./Assets/pictures/style4.png" alt="Box Braids">
+            <div class="card-content">
+                <h2 class="card-title">Box Braids</h2>
+                <p class="card-description">Neat, long-lasting box braids perfect for all occasions.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Box Braids are one of our most popular styles, designed to protect your hair while providing a stylish look. Choose from various lengths and thicknesses. Ideal for both everyday wear and special events.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="./Assets/pictures/style5.png" alt="Cornrows">
+            <div class="card-content">
+                <h2 class="card-title">Cornrows</h2>
+                <p class="card-description">Traditional and modern cornrow styles with creative designs.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Cornrows are perfect for showcasing your personality. We offer intricate designs and classic rows, styled to suit your preferences. This protective style is long-lasting and easy to maintain.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="./Assets/pictures/Style1.jpeg" alt="Twists">
+            <div class="card-content">
+                <h2 class="card-title">Twists</h2>
+                <p class="card-description">Soft, elegant twists that give your hair volume and style.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Our twists are ideal for a voluminous look while keeping your hair healthy. We use high-quality products to ensure your twists are soft and durable, offering both mini and large twists based on your preference.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="./Assets/pictures/Style2.jpeg" alt="Custom Styles">
+            <div class="card-content">
+                <h2 class="card-title">Custom Styles</h2>
+                <p class="card-description">Personalized braiding styles tailored to your unique taste.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Can't find a style you love? Work with us to create a custom look! Whether it's a combination of styles or something entirely new, we help you achieve the braids that suit your personality and hair care needs.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="./Assets/pictures/style3.jpeg" alt="Hair Care Consultation">
+            <div class="card-content">
+                <h2 class="card-title">Hair Care Consultation</h2>
+                <p class="card-description">Get expert advice on styles that suit your hair and promote its health.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Our hair care consultations include personalized recommendations based on your hair type and goals. We'll help you choose protective styles and suggest the best products to keep your hair strong and healthy.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="./Assets/pictures/style6.png" alt="Hair Care Consultation">
+            <div class="card-content">
+                <h2 class="card-title">Hair Care Consultation</h2>
+                <p class="card-description">Get expert advice on styles that suit your hair and promote its health.</p>
+            </div>
+            <div class="card-hover-info">
+                <p>Our hair care consultations include personalized recommendations based on your hair type and goals. We'll help you choose protective styles and suggest the best products to keep your hair strong and healthy.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+ <!-- Footer section -->
+
+  <!-- Footer section -->
+  <footer>
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo">
+            
+        </div>
+
+
+        <div class="footer-links">
+            <div class="ft">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="#" class="info-link" data-info="Appointments">Appointments</a></li>
+                    <li><a href="#" class="info-link" data-info="History">History</a></li>
+                    <li><a href="#" class="info-link" data-info="Mission">Mission</a></li>
+                    <li><a href="Contact.html">Contact Information</a></li>
+                    <li><a href="Contact.html#map">Location</a></li>
+                </ul>
+            </div>
+            <div class="ft">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="About.html">Hairstyles</a></li>
+                  <!-- Appointments link -->
+<li><a href="#" id="appointmentsLink">Appointments</a></li>
+
+<!-- Popup overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Popup box -->
+<div class="popup" id="popup">
+  <div class="header">
+    <h2 id="popupTitle">Information</h2>
+    <button id="minimizePopup">_</button>
+    <button id="closePopup">&times;</button>
+  </div>
+  <div class="content" id="popupContent">
+    <!-- Content will be inserted here based on the clicked link -->
+  </div>
+</div>
+
+                </ul>
+            </div>
+            <div class="ft">
+                <h4>My Account</h4>
+                <ul>
+                    <li><a href="./Login.html">Login</a></li>
+                    <li><a href="./Register.html">Register for an Account</a></li>
+                    <li><a href="./Login.html">Order History</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/Theodorah Molebogeng" target="_blank">
+            <img src="./Assets/pictures/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/27730298765" target="_blank">
+            <img src="./Assets/pictures/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.instagram.com/Club_Braids_By_Theodore" target="_blank">
+            <img src="./Assets/pictures/instagram.png" alt="Instagram">
+        </a>
+    </div>
+    <p>&copy; Copyright - ClubBraids</p>
+</footer>
+
+<script>
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('popup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupContent = document.getElementById('popupContent');
+    const closePopupBtn = document.getElementById('closePopup');
+    const minimizePopupBtn = document.getElementById('minimizePopup');
+    const infoLinks = document.querySelectorAll('.info-link');
+    let isMinimized = false;
+  
+    // Define content for each popup
+    const contentData = {
+      "Appointments": `
+        <p>A deposit of R100 is required when booking your appointments.</p>
+        <p>Appointments in advance are possible through the online booking system or via phone.</p>
+        <p>A 24-hour cancellation policy applies to all bookings.</p>
+        <p>ClubBraids uses high-quality, approved hair care products.</p>
+      `,
+      "History": `
+        <p>ClubBraids by Theodore was founded with a passion for intricate braiding techniques.</p>
+        <p>We have been serving the community with exceptional hair care for over 5 years.</p>
+      `,
+      "Mission": `
+        <p>Our mission is to provide top-quality hair braiding services for all ages and styles.</p>
+        <p>We aim to foster confidence and beauty through every braid and twist we create.</p>
+      `
+    };
+  
+    // Function to open the popup with the relevant content
+    infoLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const infoType = link.getAttribute('data-info');
+        popupTitle.textContent = infoType + " Information";
+        popupContent.innerHTML = contentData[infoType] || "Content not available";
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+        isMinimized = false;
+        popupContent.style.display = 'block';
+        popup.classList.remove('minimized');
+        minimizePopupBtn.textContent = '_';
+      });
+    });
+  
+    // Close the popup and overlay
+    closePopupBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+      popup.style.display = 'none';
+    });
+  
+    // Minimize the popup
+    minimizePopupBtn.addEventListener('click', () => {
+      if (!isMinimized) {
+        popupContent.style.display = 'none';
+        popup.classList.add('minimized');
+        minimizePopupBtn.textContent = '□';
+        isMinimized = true;
+      } else {
+        popupContent.style.display = 'block';
+        popup.classList.remove('minimized');
+        minimizePopupBtn.textContent = '_';
+        isMinimized = false;
+      }
+    });
+  
+    // Close the popup if clicking outside of it (on the overlay)
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+      popup.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

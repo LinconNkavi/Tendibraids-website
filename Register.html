@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./register.js" defer></script>
+    <link rel="stylesheet" href="./Assets/style.css">
+    <script src="./test.js"></script>
+    <title>ClubBraids Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .register {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        .buttons .signin-btn {
+            transform: translateX(-30px);
+        }
+    
+        /* Media Queries for Responsiveness */
+        
+        /* For tablets and small desktops */
+        @media (max-width: 768px) {
+            .register {
+                max-width: 90%; /* Increase form width on medium screens */
+                padding: 15px;  /* Adjust padding */
+            }
+    
+            button {
+                font-size: 14px; /* Slightly smaller button text */
+            }
+        }
+    
+        /* For mobile devices */
+        @media (max-width: 480px) {
+            .register {
+                max-width: 100%; /* Full-width form on mobile */
+                margin: 20px auto; /* Reduce top margin */
+                padding: 10px;  /* Reduce padding */
+            }
+    
+            h2 {
+                font-size: 1.5em; /* Adjust heading size */
+            }
+    
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="password"] {
+                padding: 8px; /* Reduce input padding */
+                margin-bottom: 10px; /* Reduce margin between inputs */
+            }
+    
+            button {
+                padding: 8px; /* Adjust button padding */
+                font-size: 14px; /* Smaller button text */
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+    <!-- Header with logo and navigation -->
+    <header>
+        <div class="logo">
+            <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a> 
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="About.html">About Us</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="Contact.html">Contact Us</a></li>
+            </ul>
+            <div class="buttons">
+  
+                <a href="./Login.html"><button class="signin-btn">Sign In</button></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="register">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+             
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="cellphone">Cellphone Number:</label>
+            <input type="tel" id="cellphone" name="cellphone" required>
+            
+            <label for="address">Home Address:</label>
+            <input type="text" id="address" name="address" required>
+                        
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="password">Confirm Password:</label>
+            <input type="password" id="confirm" name="condirm" required>
+
+            <button type="submit" id="submit">Create Account</button>
+        </form>
+    </div>
+
+    
+
+    <!-- Footer section -->
+ <!-- Footer section -->
+ <footer>
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo">
+            
+        </div>
+
+
+        <div class="footer-links">
+            <div class="ft">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="#" class="info-link" data-info="Appointments">Appointments</a></li>
+                    <li><a href="#" class="info-link" data-info="History">History</a></li>
+                    <li><a href="#" class="info-link" data-info="Mission">Mission</a></li>
+                    <li><a href="Contact.html">Contact Information</a></li>
+                    <li><a href="Contact.html#map">Location</a></li>
+                </ul>
+            </div>
+            <div class="ft">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="About.html">Hairstyles</a></li>
+                  <!-- Appointments link -->
+<li><a href="#" id="appointmentsLink">Appointments</a></li>
+
+<!-- Popup overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Popup box -->
+<div class="popup" id="popup">
+  <div class="header">
+    <h2 id="popupTitle">Information</h2>
+    <button id="minimizePopup">_</button>
+    <button id="closePopup">&times;</button>
+  </div>
+  <div class="content" id="popupContent">
+    <!-- Content will be inserted here based on the clicked link -->
+  </div>
+</div>
+
+                </ul>
+            </div>
+            <div class="ft">
+                <h4>My Account</h4>
+                <ul>
+                    <li><a href="./Login.html">Login</a></li>
+                    <li><a href="./Register.html">Register for an Account</a></li>
+                    <li><a href="./Login.html">Order History</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/Theodorah Molebogeng" target="_blank">
+            <img src="./Assets/pictures/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/27730298765" target="_blank">
+            <img src="./Assets/pictures/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.instagram.com/Club_Braids_By_Theodore" target="_blank">
+            <img src="./Assets/pictures/instagram.png" alt="Instagram">
+        </a>
+    </div>
+    <p>&copy; Copyright - ClubBraids</p>
+</footer>
+
+<script>
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('popup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupContent = document.getElementById('popupContent');
+    const closePopupBtn = document.getElementById('closePopup');
+    const minimizePopupBtn = document.getElementById('minimizePopup');
+    const infoLinks = document.querySelectorAll('.info-link');
+    let isMinimized = false;
+  
+    // Define content for each popup
+    const contentData = {
+      "Appointments": `
+        <p>A deposit of R100 is required when booking your appointments.</p>
+        <p>Appointments in advance are possible through the online booking system or via phone.</p>
+        <p>A 24-hour cancellation policy applies to all bookings.</p>
+        <p>ClubBraids uses high-quality, approved hair care products.</p>
+      `,
+      "History": `
+        <p>ClubBraids by Theodore was founded with a passion for intricate braiding techniques.</p>
+        <p>We have been serving the community with exceptional hair care for over 5 years.</p>
+      `,
+      "Mission": `
+        <p>Our mission is to provide top-quality hair braiding services for all ages and styles.</p>
+        <p>We aim to foster confidence and beauty through every braid and twist we create.</p>
+      `
+    };
+  
+    // Function to open the popup with the relevant content
+    infoLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const infoType = link.getAttribute('data-info');
+        popupTitle.textContent = infoType + " Information";
+        popupContent.innerHTML = contentData[infoType] || "Content not available";
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+        isMinimized = false;
+        popupContent.style.display = 'block';
+        popup.classList.remove('minimized');
+        minimizePopupBtn.textContent = '_';
+      });
+    });
+  
+    // Close the popup and overlay
+    closePopupBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+      popup.style.display = 'none';
+    });
+  
+    // Minimize the popup
+    minimizePopupBtn.addEventListener('click', () => {
+      if (!isMinimized) {
+        popupContent.style.display = 'none';
+        popup.classList.add('minimized');
+        minimizePopupBtn.textContent = '□';
+        isMinimized = true;
+      } else {
+        popupContent.style.display = 'block';
+        popup.classList.remove('minimized');
+        minimizePopupBtn.textContent = '_';
+        isMinimized = false;
+      }
+    });
+  
+    // Close the popup if clicking outside of it (on the overlay)
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+      popup.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
