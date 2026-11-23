@@ -4,208 +4,720 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Assets/style.css">
-    <script src="./test.js"></script>
-    <title>About Us</title>
+    <script src="./test.js" defer></script>
+    <title>About Us | ClubBraids by Theodore</title>
+    <style>
+        :root {
+            --bg: #f8f6f5;
+            --surface: #ffffff;
+            --ink: #221d1c;
+            --muted: #5c5350;
+            --rose: #d95b8a;
+            --rose-soft: #fdf2f6;
+            --dark-bar: #333333;
+            --border: #e8e0dd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body.about-page {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Header / Navigation */
+        .site-header {
+            background-color: var(--dark-bar);
+            color: #ffffff;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .header-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .site-logo img {
+            height: 46px;
+            width: auto;
+            display: block;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .site-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .site-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .site-nav a:hover,
+        .site-nav a.active {
+            color: #ff9ec2;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .nav-btn {
+            padding: 0.45rem 0.95rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 1px solid #ffb3cf;
+            white-space: nowrap;
+        }
+
+        .nav-btn.register-btn {
+            background: #ffe3ee;
+            color: #2b1820;
+        }
+
+        .nav-btn.signin-btn {
+            background: transparent;
+            color: #ffffff;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            padding: 0.35rem 0.65rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        /* Main Page Container */
+        .about-container {
+            max-width: 1120px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .page-banner {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--rose);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .page-banner h1 {
+            margin: 0 0 0.4rem;
+            font-size: clamp(1.75rem, 3vw, 2.3rem);
+            color: var(--ink);
+        }
+
+        .page-banner p {
+            margin: 0;
+            color: var(--muted);
+            max-width: 720px;
+        }
+
+        .about-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-heading {
+            margin: 0 0 1.25rem;
+            font-size: 1.5rem;
+            color: var(--rose);
+            line-height: 1.25;
+        }
+
+        /* Business Background Grid */
+        .bg-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.85fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .bg-text p {
+            margin: 0 0 1rem;
+            color: var(--ink);
+        }
+
+        .bg-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .founder-frame {
+            background: var(--rose-soft);
+            border: 1px solid #f2d8e3;
+            border-radius: 14px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .founder-frame img {
+            width: 100%;
+            max-width: 320px;
+            height: 320px;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto 0.75rem;
+        }
+
+        .founder-caption {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* Two-column details for Services & Policies */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .clean-list {
+            list-style: none;
+            margin: 0 0 1.25rem;
+            padding: 0;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .clean-list li {
+            position: relative;
+            padding-left: 1.35rem;
+            color: var(--ink);
+        }
+
+        .clean-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--rose);
+            font-weight: bold;
+            font-size: 1.15rem;
+            line-height: 1.45;
+        }
+
+        .about-card p {
+            margin: 0 0 1rem;
+            color: var(--muted);
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Our Mission Showcase Card */
+        .mission-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fff6fa 100%);
+            border: 1px solid #f1d4e0;
+            border-left: 5px solid var(--rose);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 4px 18px rgba(217, 91, 138, 0.08);
+        }
+
+        .mission-pillars {
+            margin-top: 1.25rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+        }
+
+        .pillar-box {
+            background: #ffffff;
+            border: 1px solid #f2dce5;
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+        }
+
+        .pillar-box strong {
+            display: block;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+            font-size: 0.98rem;
+        }
+
+        .pillar-box span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--dark-bar);
+            color: #ffffff;
+            margin-top: 3rem;
+            padding: 2.5rem 1.5rem 1.75rem;
+        }
+
+        .footer-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: minmax(150px, 1fr) repeat(3, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .footer-brand img {
+            height: 64px;
+            width: auto;
+            display: block;
+        }
+
+        .footer-col h4 {
+            margin: 0 0 0.85rem;
+            color: #ff8cb8;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .footer-col a {
+            color: #f1ecee;
+            text-decoration: none;
+            font-size: 0.94rem;
+        }
+
+        .footer-col a:hover {
+            color: #ff9ec2;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1160px;
+            margin: 2rem auto 0;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-row img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .copyright-text {
+            margin: 0;
+            color: #dcd4d7;
+            font-size: 0.9rem;
+        }
+
+        /* Popup Modal */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 900;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(92vw, 480px);
+            background: #ffffff;
+            color: var(--ink);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+            z-index: 950;
+        }
+
+        .popup .header {
+            background: var(--dark-bar);
+            color: #ffffff;
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .popup .header h2 {
+            margin: 0;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .popup .header button {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .popup .content {
+            padding: 1.25rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 860px) {
+            .bg-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: repeat(2, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .mobile-toggle {
+                display: inline-block;
+            }
+
+            .site-nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 0.75rem;
+                gap: 1rem;
+            }
+
+            .site-nav.open {
+                display: flex;
+            }
+
+            .site-nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body>
-    
+<body class="about-page">
+
     <!-- Header with logo and navigation -->
-    <header>
-        <div class="logo">
-            <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a> 
-        </div>
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <nav id="navbar">
-            <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="Services.html">Services</a></li>
-                <li><a href="Contact.html">Contact Us</a></li>
-            </ul>
-            <div class="buttons">
-                <a href="./Register.html"><button class="register-btn">Register</button></a>
-                <a href="./Login.html"><button class="signin-btn">Sign In</button></a>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="site-logo">
+                <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo" /></a>
             </div>
-        </nav>
+
+            <button type="button" class="mobile-toggle" aria-label="Toggle navigation" onclick="toggleMobileNav()">&#9776;</button>
+
+            <nav id="navbar" class="site-nav">
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="About.html" class="active">About Us</a></li>
+                    <li><a href="Contact.html">Contact Us</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="./Register.html"><button type="button" class="nav-btn register-btn">Register</button></a>
+                    <a href="./Login.html"><button type="button" class="nav-btn signin-btn">Sign In</button></a>
+                </div>
+            </nav>
+        </div>
     </header>
 
+    <main class="about-container">
+        <section class="page-banner">
+            <h1>About ClubBraids by Theodore</h1>
+            <p>Craftsmanship, hair health, and welcoming braiding services rooted in Sharpeville, Vaal.</p>
+        </section>
 
-
-
-    <div class="abtCo">
-        <div class="cont">
-            <div class="cont1">
-                <h2>Business Background</h2>
-            <p><strong>ClubBraids by Theodore</strong> is a vibrant hair braiding business owned by Theodore Moleboheng Senokoane, based in Sharpville, Vaal. 
-                Specializing in intricate and creative braiding techniques, ClubBraids caters to individuals looking for professional and personalized hair styling services.
-                <br><br>Theodore has become a trusted name in her community, known for delivering beautiful braids that embrace cultural heritage while providing clients with modern, trendy styles.</p>
-             <img src="./Assets/pictures/theo.png" alt="Theodore"/>
+        <section class="about-card">
+            <h2 class="section-heading">Business Background</h2>
+            <div class="bg-grid">
+                <div class="bg-text">
+                    <p>
+                        <strong>ClubBraids by Theodore</strong> is a vibrant hair braiding business owned by
+                        <strong>Theodore Moleboheng Senokoane</strong>, based in Sharpeville, Vaal. Specializing
+                        in intricate and creative braiding techniques, ClubBraids caters to individuals looking for
+                        professional and personalized hair styling services.
+                    </p>
+                    <p>
+                        Theodore has become a trusted name in her community, known for delivering beautiful braids
+                        that embrace cultural heritage while providing clients with modern, trendy styles.
+                    </p>
+                </div>
+                <div class="founder-frame">
+                    <img src="./Assets/pictures/theo.png" alt="Theodore Moleboheng Senokoane" />
+                    <p class="founder-caption">Theodore Moleboheng Senokoane — Founder</p>
+                </div>
             </div>
-            
-            <h2>We offer</h2>
-           
-            <ul>
-                <li>Box Braids</li>
-                <li>Cornrows</li>
-                <li>Twists</li>
-                <li>Customized Hairstyles</li>
-            </ul>
-            <p>Whether you are a woman, man, or child, ClubBraids has the expertise to meet your braiding needs. Theodore also offers personalized hair care consultations, recommending styles that promote hair health while ensuring your braids are both stylish and long-lasting.</p>
-            <p>For added convenience, ClubBraids provides mobile services for clients who prefer the comfort of at-home braiding sessions.</p>
-        </div>
-    
-       
-    
-        <div class="cont">
-            <h2>More Information</h2>
-            <ul>
-                <li>A Deposit of R100 is required when booking your ppointments</li>
-                <li>Appointments in advance are possible through the online booking system or via phone.</li>
-                <li>A 24-hour cancellation policy applies to all bookings.</li>
-                <li>ClubBraids uses high-quality, approved hair care products </li>
-            </ul>
-        </div>
-    </div>
-    
- <!-- Footer section -->
- <footer>
-    <div class="footer-content">
+        </section>
 
-        <div class="footer-logo">
-            <img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo">
-            
-        </div>
-
-
-        <div class="footer-links">
-            <div class="ft">
-                <h4>About Us</h4>
-                <ul>
-                    <li><a href="#" class="info-link" data-info="Appointments">Appointments</a></li>
-                    <li><a href="#" class="info-link" data-info="History">History</a></li>
-                    <li><a href="#" class="info-link" data-info="Mission">Mission</a></li>
-                    <li><a href="Contact.html">Contact Information</a></li>
-                    <li><a href="Contact.html#map">Location</a></li>
+        <div class="two-col-grid">
+            <section class="about-card">
+                <h2 class="section-heading">We Offer</h2>
+                <ul class="clean-list">
+                    <li>Box Braids</li>
+                    <li>Cornrows</li>
+                    <li>Twists</li>
+                    <li>Customized Hairstyles</li>
                 </ul>
-            </div>
-            <div class="ft">
-                <h4>Products</h4>
-                <ul>
-                    <li><a href="About.html">Hairstyles</a></li>
-                  <!-- Appointments link -->
-<li><a href="#" id="appointmentsLink">Appointments</a></li>
+                <p>
+                    Whether you are a woman, man, or child, ClubBraids has the expertise to meet your braiding needs.
+                    Theodore also offers personalized hair care consultations, recommending styles that promote hair
+                    health while ensuring your braids are both stylish and long-lasting.
+                </p>
+                <p>
+                    For added convenience, ClubBraids provides mobile services for clients who prefer the comfort of
+                    at-home braiding sessions.
+                </p>
+            </section>
 
-<!-- Popup overlay -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Popup box -->
-<div class="popup" id="popup">
-  <div class="header">
-    <h2 id="popupTitle">Information</h2>
-    <button id="minimizePopup">_</button>
-    <button id="closePopup">&times;</button>
-  </div>
-  <div class="content" id="popupContent">
-    <!-- Content will be inserted here based on the clicked link -->
-  </div>
-</div>
-
+            <section class="about-card">
+                <h2 class="section-heading">More Information</h2>
+                <ul class="clean-list">
+                    <li>A deposit of R100 is required when booking your appointments.</li>
+                    <li>Appointments in advance are possible through the online booking system or via phone.</li>
+                    <li>A 24-hour cancellation policy applies to all bookings.</li>
+                    <li>ClubBraids uses high-quality, approved hair care products.</li>
                 </ul>
+            </section>
+        </div>
+
+        <section class="mission-card">
+            <h2 class="section-heading">Our Mission</h2>
+            <p>
+                Our mission is to provide top-quality hair braiding services for all ages and styles while
+                fostering confidence, neatness, and healthy hair through every braid and twist we create. 
+                We aim to foster confidence and beauty through every braid and twist we create.
+            </p>
+            <div class="mission-pillars">
+                <div class="pillar-box">
+                    <strong>Healthy Hair First</strong>
+                    <span>Thoughtful styling and approved products that protect natural hair.</span>
+                </div>
+                <div class="pillar-box">
+                    <strong>For Every Generation</strong>
+                    <span>Welcoming, tailored braiding for women, men, and children.</span>
+                </div>
+                <div class="pillar-box">
+                    <strong>Confidence &amp; Care</strong>
+                    <span>Neat finishes and flexible options—in-chair or at home.</span>
+                </div>
             </div>
-            <div class="ft">
-                <h4>My Account</h4>
-                <ul>
-                    <li><a href="./Login.html">Login</a></li>
-                    <li><a href="./Register.html">Register for an Account</a></li>
-                    <li><a href="./Login.html">Order History</a></li>
-                </ul>
+        </section>
+    </main>
+
+    <!-- Popup overlay & box -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+        <div class="header">
+            <h2 id="popupTitle">Information</h2>
+            <button type="button" id="minimizePopup" title="Minimize">_</button>
+            <button type="button" id="closePopup" title="Close">&times;</button>
+        </div>
+        <div class="content" id="popupContent"></div>
+    </div>
+
+    <!-- Footer section -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="./index.html"><img src="./Assets/pictures/Footer.png" alt="ClubBraids Logo"></a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#" class="info-link" data-info="Appointments">Appointments</a></li>
+                        <li><a href="#" class="info-link" data-info="History">History</a></li>
+                        <li><a href="#" class="info-link" data-info="Mission">Mission</a></li>
+                        <li><a href="Contact.html">Contact Information</a></li>
+                        <li><a href="Contact.html#map">Location</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="Products.html">Hairstyles</a></li>
+                        <li><a href="#" class="info-link" data-info="Appointments">Appointments</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>My Account</h4>
+                    <ul>
+                        <li><a href="./Login.html">Login</a></li>
+                        <li><a href="./Register.html">Register for an Account</a></li>
+                        <li><a href="./Login.html">Order History</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-row">
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <img src="./Assets/pictures/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://wa.me/27730298765" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <img src="./Assets/pictures/whatsapp.png" alt="WhatsApp">
+                    </a>
+                    <a href="https://www.instagram.com/Club_Braids_By_Theodore" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <img src="./Assets/pictures/instagram.png" alt="Instagram">
+                    </a>
+                </div>
+                <p class="copyright-text">&copy; <span id="copyrightYear">2026</span> Copyright - ClubBraids</p>
             </div>
         </div>
-    </div>
-    <div class="social-icons">
-        <a href="https://www.facebook.com/Theodorah Molebogeng" target="_blank">
-            <img src="./Assets/pictures/facebook.png" alt="Facebook">
-        </a>
-        <a href="https://wa.me/27730298765" target="_blank">
-            <img src="./Assets/pictures/whatsapp.png" alt="WhatsApp">
-        </a>
-        <a href="https://www.instagram.com/Club_Braids_By_Theodore" target="_blank">
-            <img src="./Assets/pictures/instagram.png" alt="Instagram">
-        </a>
-    </div>
-    <p>&copy; Copyright - ClubBraids</p>
-</footer>
+    </footer>
 
-<script>
-    const overlay = document.getElementById('overlay');
-    const popup = document.getElementById('popup');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupContent = document.getElementById('popupContent');
-    const closePopupBtn = document.getElementById('closePopup');
-    const minimizePopupBtn = document.getElementById('minimizePopup');
-    const infoLinks = document.querySelectorAll('.info-link');
-    let isMinimized = false;
-  
-    // Define content for each popup
-    const contentData = {
-      "Appointments": `
-        <p>A deposit of R100 is required when booking your appointments.</p>
-        <p>Appointments in advance are possible through the online booking system or via phone.</p>
-        <p>A 24-hour cancellation policy applies to all bookings.</p>
-        <p>ClubBraids uses high-quality, approved hair care products.</p>
-      `,
-      "History": `
-        <p>ClubBraids by Theodore was founded with a passion for intricate braiding techniques.</p>
-        <p>We have been serving the community with exceptional hair care for over 5 years.</p>
-      `,
-      "Mission": `
-        <p>Our mission is to provide top-quality hair braiding services for all ages and styles.</p>
-        <p>We aim to foster confidence and beauty through every braid and twist we create.</p>
-      `
-    };
-  
-    // Function to open the popup with the relevant content
-    infoLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const infoType = link.getAttribute('data-info');
-        popupTitle.textContent = infoType + " Information";
-        popupContent.innerHTML = contentData[infoType] || "Content not available";
-        overlay.style.display = 'block';
-        popup.style.display = 'block';
-        isMinimized = false;
-        popupContent.style.display = 'block';
-        popup.classList.remove('minimized');
-        minimizePopupBtn.textContent = '_';
-      });
-    });
-  
-    // Close the popup and overlay
-    closePopupBtn.addEventListener('click', () => {
-      overlay.style.display = 'none';
-      popup.style.display = 'none';
-    });
-  
-    // Minimize the popup
-    minimizePopupBtn.addEventListener('click', () => {
-      if (!isMinimized) {
-        popupContent.style.display = 'none';
-        popup.classList.add('minimized');
-        minimizePopupBtn.textContent = '□';
-        isMinimized = true;
-      } else {
-        popupContent.style.display = 'block';
-        popup.classList.remove('minimized');
-        minimizePopupBtn.textContent = '_';
-        isMinimized = false;
-      }
-    });
-  
-    // Close the popup if clicking outside of it (on the overlay)
-    overlay.addEventListener('click', () => {
-      overlay.style.display = 'none';
-      popup.style.display = 'none';
-    });
-  </script>
+    <script>
+        function toggleMobileNav() {
+            const nav = document.getElementById('navbar');
+            if (nav) {
+                nav.classList.toggle('open');
+            }
+        }
 
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupContent = document.getElementById('popupContent');
+        const closePopupBtn = document.getElementById('closePopup');
+        const minimizePopupBtn = document.getElementById('minimizePopup');
+        const infoLinks = document.querySelectorAll('.info-link');
+        let isMinimized = false;
+
+        const contentData = {
+            "Appointments": `
+                <p>A deposit of R100 is required when booking your appointments.</p>
+                <p>Appointments in advance are possible through the online booking system or via phone.</p>
+                <p>A 24-hour cancellation policy applies to all bookings.</p>
+                <p>ClubBraids uses high-quality, approved hair care products.</p>
+            `,
+            "History": `
+                <p>ClubBraids by Theodore was founded with a passion for intricate braiding techniques.</p>
+                <p>We have been serving the community with exceptional hair care for over 5 years.</p>
+            `,
+            "Mission": `
+                <p>Our mission is to provide top-quality hair braiding services for all ages and styles.</p>
+                <p>We aim to foster confidence and beauty through every braid and twist we create.</p>
+            `
+        };
+
+        infoLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const infoType = link.getAttribute('data-info');
+                popupTitle.textContent = infoType + " Information";
+                popupContent.innerHTML = contentData[infoType] || "<p>Content not available.</p>";
+                overlay.style.display = 'block';
+                popup.style.display = 'block';
+                isMinimized = false;
+                popupContent.style.display = 'block';
+                minimizePopupBtn.textContent = '_';
+            });
+        });
+
+        function closeModal() {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        closePopupBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+
+        minimizePopupBtn.addEventListener('click', () => {
+            if (!isMinimized) {
+                popupContent.style.display = 'none';
+                minimizePopupBtn.textContent = '□';
+                isMinimized = true;
+            } else {
+                popupContent.style.display = 'block';
+                minimizePopupBtn.textContent = '_';
+                isMinimized = false;
+            }
+        });
+    </script>
 </body>
 </html>
